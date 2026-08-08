@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Arkanabhan Faeyza Saylendra</title>
+    <!-- Font Inter & Orbitron dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === RESET & VARIABLE === */
+        :root {
+            --bg-color: #080d1a;
+            --card-bg: rgba(13, 25, 48, 0.55);
+            --border-color: rgba(0, 162, 255, 0.25);
+            --primary-blue: #0088ff;
+            --neon-glow: #00d4ff;
+            --text-main: #ffffff;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* === BACKGROUND ANIMATION === */
+        .bg-glow {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(0, 136, 255, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            filter: blur(50px);
+            animation: pulse 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+        }
+
+        /* Canvas Partikel */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* === CONTAINER / CARD (GLASSMORPHISM) === */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                        0 0 20px rgba(0, 136, 255, 0.15);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 212, 255, 0.6);
+            transform: translateY(-5px);
+        }
+
+        /* === PROFIL FOTO === */
+        .profile-container {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 24px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            border: 2px solid var(--neon-glow);
+        }
+
+        .profile-glow {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-blue), var(--neon-glow));
+            z-index: 1;
+            filter: blur(8px);
+            opacity: 0.7;
+            animation: rotateGlow 8s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* === INFORMASI DIRI === */
+        .name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .description {
+            font-size: 0.95rem;
+            color: var(--neon-glow);
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            opacity: 0.9;
+        }
+
+        /* === LINKS / BUTTONS === */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            background: rgba(0, 136, 255, 0.08);
+            border: 1px solid rgba(0, 136, 255, 0.25);
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-link i {
+            font-size: 1.2rem;
+            color: var(--neon-glow);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-link:hover {
+            background: var(--primary-blue);
+            border-color: var(--neon-glow);
+            box-shadow: 0 0 20px rgba(0, 136, 255, 0.5);
+            transform: scale(1.02);
+            color: #fff;
+        }
+
+        .btn-link:hover i {
+            color: #fff;
+            transform: scale(1.15);
+        }
+
+        /* === FOOTER === */
+        footer {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 18px;
+        }
+
+        /* === RESPONSIVE (MOBILE ADJUSTMENTS) === */
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+
+            .name {
+                font-size: 1.25rem;
+            }
+
+            .profile-container {
+                width: 110px;
+                height: 110px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Efek Latar Belakang Dynamic Glow & Canvas -->
+    <div class="bg-glow"></div>
+    <canvas id="particles"></canvas>
+
+    <!-- Kartu Utama / Profil -->
+    <div class="card">
+        <!-- Foto Profil -->
+        <div class="profile-container">
+            <div class="profile-glow"></div>
+            <img src="profil.png" alt="Arkanabhan Faeyza Saylendra" class="profile-img" onerror="this.src='https://via.placeholder.com/150/0d1930/00d4ff?text=AF';">
+        </div>
+
+        <!-- Nama & Deskripsi -->
+        <h1 class="name">Arkanabhan Faeyza Saylendra</h1>
+        <p class="description">Santri SAB</p>
+
+        <!-- Link Kontak -->
+        <div class="links-container">
+            <a href="https://wa.me/6285710301156" target="_blank" rel="noopener noreferrer" class="btn-link">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+            <a href="https://instagram.com/saylenddd" target="_blank" rel="noopener noreferrer" class="btn-link">
+                <i class="fa-brands fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            &copy; 2026 Arkan
+        </footer>
+    </div>
+
+    <!-- === JAVASCRIPT INLINE (Partikel & Interaksi) === -->
+    <script>
+        // Membuat Partikel Latar Belakang Sederhana
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particlesArray = [];
+        const numberOfParticles = 40;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArray.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+    </script>
+</body>
+</html>
